@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const bcryp = require('bcrypt');
+
 const schema = new Schema({
     img: { type: String, unique: true, required: true },
     name: { type: String, required: true },
