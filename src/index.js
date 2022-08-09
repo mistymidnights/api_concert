@@ -41,16 +41,16 @@ app.use('/api/v1/user', UserRoutes);
 // Error handler
 app.use((error, _req, res, _next) => {
     return  res
-    .status(error.status || 500)
+    .status(error.code || 500)
     .json(error.message || 'Unexpected error');
 });
 
 
 app.use('*', (_req, _res, next) => {
-    const error = new Error()
-    error.status = 404
-    error.message = 'Route not found'
-    return next(error)
+    const error = new Error();
+    error.status = 404;
+    error.message = 'Route not found';
+    return next(error);
 })
 
 

@@ -11,7 +11,7 @@ const validationEmail = (email) => {
 const validationPassword = (password) => {
     const response =
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-.]).{8,}$/;
-    return response.test(String(password));
+    return   response.test(String(password));
 
 }
 
@@ -21,7 +21,7 @@ const createToken = (id, user) => {
 
 }
 const verifyToken = (token) => {
-    jwt.verify(token, process.env.JWT_SECRET);
+    return  jwt.verify(token, process.env.JWT_SECRET);
 }
 
 

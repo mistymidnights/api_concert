@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const bcryp = require('bcrypt');
-const {validatePassword, setError} = require ('../../helpers/utils');
+const {validationPassword, setError} = require ('../../helpers/utils');
 
 
 const schema = new Schema({
@@ -22,7 +22,7 @@ const schema = new Schema({
 );
 
 schema.pre('save', function (next){
-    if (!validatePassword(this.password)) return next (setError('400','Contraseña Invalida '))
+    if (!validationPassword(this.password)) return next (setError('400','Contraseña Invalida '))
     this.password =bcryp.hashSync(this.password, 16);
     next();
 
