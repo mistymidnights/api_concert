@@ -50,7 +50,7 @@ module.exports ={
 
 // const getAll = async (req, res, next) => {
 //     try {
-//         const elements = await Element.find();
+//           const elements = await Element.find();
 //         return res.json({
 //             status: 200,
 //             message: 'Recovered all elements',
