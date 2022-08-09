@@ -8,8 +8,9 @@ const { createConnection } = require('mongoose');
 const register = async (req, res, next)=>{
     try {
         const newUser =  new User(req.body);
-        const userExits = await User.findOne({email: newUser.email});
-        if (userExits) return next(setError(409, 'This email already exist'))
+        const emailExist = await User.findOne({email: newUser.email});
+        const usernameExist = await User.findOne({username: newUser.username});
+        if (emailExist || usernameExist) return next(setError(409, 'This email || userName already exist'));
         const userInDb =await newUser.save();
         res.status (201).json(userInDb);
 

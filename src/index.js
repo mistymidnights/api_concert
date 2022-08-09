@@ -27,6 +27,9 @@ app.use((_req, res, next) => {
     next();
 });
 
+
+
+
 // Json Data
 app.use(express.json({ limit: '1mb' }))
 // urlEncoded
@@ -55,6 +58,8 @@ app.use('*', (_req, _res, next) => {
 app.disable('x-powered-by')
 // Open Listener Server
 
+
 app.listen(PORT, () => {
-    console.log('Server on air');
-})
+    console.log('Server is running in http://localhost:' + PORT)
+  });
+
