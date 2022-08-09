@@ -1,7 +1,7 @@
 {
   "name": "api_concert",
   "version": "1.0.0",
-  "description": "",
+  "description": "Node proyecto to Neoland",
   "main": "./src/index.js",
   "scripts": {
     "test": "node ./src/index.js",
