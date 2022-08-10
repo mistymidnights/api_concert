@@ -1,15 +1,11 @@
 const UserRoutes = require('express').Router();
-
 const rateLimit =require('express-rate-limit');
-
-//middleware será para los otros endpoint
+const { authorize } = require("../../middleware/auth");
 
 const {
-    // getAll,
-    // getById,
-    // create,
-    // update,
-    // deleteElement 
+    userById, 
+    update, 
+    remove, 
     register,
     login
 } = require('./user.controller');
@@ -23,15 +19,13 @@ const userCreateRateLimit = rateLimit({
 });
 
 
-// UserRoutes.get('/', getAll)
-// UserRoutes.get('/:id', getById)
 
 
 UserRoutes.post('/register', [userCreateRateLimit], register);
-UserRoutes.post('/login', login );
+UserRoutes.post('/login', login);
+UserRoutes.get('/:id', [authorize], userById);
+UserRoutes.patch('/:id', [authorize], update);
+UserRoutes.delete('/:id', [authorize], remove);
 
-
-// UserRoutes.patch('/:id', update)
-// UserRoutes.delete('/:id', deleteElement)
 
 module.exports = UserRoutes;

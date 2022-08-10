@@ -55,7 +55,7 @@ const login = async (req, res, next )=> {
 
 const update = async (req, res, next) => {
     try {
-      const { id } = req.params.id;
+      const { id } = req.params;
       const user = new User(req.body);
       user._id = id;
       const updatedUser = await User.findByIdAndUpdate(id, user);
@@ -73,7 +73,7 @@ const update = async (req, res, next) => {
   
 const remove = async (req, res, next) => {
     try {
-      const { id } = req.params.id;
+      const { id } = req.params;
       const deletedUser = await User.findByIdAndDelete(id);
       if (!deletedUser) return next(setError(404, 'User not found'));
       return res.status(200).json({

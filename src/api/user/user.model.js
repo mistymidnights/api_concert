@@ -10,7 +10,7 @@ const schema = new Schema({
     email: { type: String, unique: true, required: true },
     username: { type: String, required: true, unique: true },
     password:  {type: String, required: true },
-    friend: [{ type: String, }],
+    friend: [{ type: Schema.Types.ObjectId, ref: "user" }],
     preference: [{ type: Schema.Types.ObjectId, ref: "artist" }],
     nextConcert: [{ type: Schema.Types.ObjectId, ref: "concert" }],
     comment: [{ type: Schema.Types.ObjectId, ref: "concert" }],
