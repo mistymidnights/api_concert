@@ -4,6 +4,17 @@ const { setError } = require('../../helpers/utils');
 const { createToken } = require('../../helpers/token-action');
 
 
+const userById = async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      if (id != req.user.id) return next(setError(403, "Forbidden"));
+      const user = await User.findById(id);
+      if (!user) return next(setError(404, "User not found"));
+      return res.status(200).json(user);
+    } catch (error) {
+      return next(setError(500, error.message || 'Failed recover User'));
+    }
+  }
 
 const register = async (req, res, next)=>{
     try {
@@ -42,78 +53,50 @@ const login = async (req, res, next )=> {
 
 }
 
+
+
+const update = async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const user = new User(req.body);
+      user._id = id;
+      const updatedUser = await User.findByIdAndUpdate(id, user);
+      if (!updatedUser) return next(setError(404, 'User not found'));
+      return res.status(201).json({
+        message: 'Updated User',
+        updatedUser
+      })
+  
+    } catch (error) {
+      return next(setError(500, error.message | 'Failed updated user'));
+    }
+  }
+  
+  
+const remove = async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const deletedUser = await User.findByIdAndDelete(id);
+      if (!deletedUser) return next(setError(404, 'User not found'));
+      return res.status(200).json({
+        message: 'Delete User',
+        deletedUser
+      })
+    } catch (error) {
+      return next(setError(500, error.message | 'Failed deleted user'));
+    }
+  }
+
+module.exports ={
+    register, 
+    login,
+    userById,
+    update,
+    remove
+};
+
 module.exports ={
     register, 
     login
 };
-
-
-// const getAll = async (req, res, next) => {
-//     try {
-//         const elements = await Element.find();
-//         return res.json({
-//             status: 200,
-//             message: 'Recovered all elements',
-//             data: { elements: elements }
-//         });
-//     } catch (error) {
-//         return next(setError(500, 'Failed all codes'));
-//     }
-// }
-
-// const getById = async (req, res, next) => {
-//     try {
-//         const { id } = req.params
-//         const element = await Element.findById(id);
-//         if (!element) return next(setError(404, 'Element not found'))
-//         return res.json({
-//             status: 200,
-//             message: 'Recovered all elements',
-//             data: { element: element }
-//         });
-//     } catch (error) {
-//         return next(setError(500, 'Failed element'))
-//     }
-// }
-
-// const update = async (req, res, next) => {
-//     try {
-//         const { id } = req.params
-//         const element = new Element(req.body);
-//         element._id = id;
-//         const updatedElement = await Element.findByIdAndUpdate(id, element)
-//         if (!updatedElement) return next(setError(404, 'Code not found'))
-//         return res.json({
-//             status: 201,
-//             message: 'Updated element',
-//             data: { element: updatedElement }
-//         });
-//     } catch (error) {
-//         return next(setError(500, 'Failed updated element'));
-//     }
-// }
-
-// const deleteElement = async (req, res, next) => {
-//     try {
-//         const { id } = req.params
-//         const deletedElement = await Element.findByIdAndDelete(id)
-//         if (!deletedElement) return next(setError(404, 'Element not found'))
-//         return res.json({
-//             status: 200,
-//             message: 'deleted element',
-//             data: { element: deletedElement }
-//         });
-//     } catch (error) {
-//         return next(setError(500, 'Failed deleted element'));
-//     }
-// }
-
-// module.exports = {
-//     getAll,
-//     getById,
-//     create,
-//     update,
-//     deleteElement
-// }
-
 
