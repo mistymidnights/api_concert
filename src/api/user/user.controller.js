@@ -94,9 +94,3 @@ module.exports ={
     update,
     remove
 };
-
-module.exports ={
-    register, 
-    login
-};
-
