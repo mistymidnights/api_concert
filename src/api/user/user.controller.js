@@ -1,7 +1,7 @@
 const User = require('./user.model');
 const bcrypt = require ('bcrypt')
-const { setError, createToken } = require('../../helpers/utils');
-const { createConnection } = require('mongoose');
+const { setError } = require('../../helpers/utils');
+const { createToken } = require('../../helpers/token-action');
 
 
 
@@ -50,7 +50,7 @@ module.exports ={
 
 // const getAll = async (req, res, next) => {
 //     try {
-//           const elements = await Element.find();
+//         const elements = await Element.find();
 //         return res.json({
 //             status: 200,
 //             message: 'Recovered all elements',

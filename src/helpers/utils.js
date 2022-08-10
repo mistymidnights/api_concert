@@ -16,26 +16,26 @@ const validationPassword = (password) => {
 }
 
 
-const createToken = (id, user) => {
-    return jwt.sign({ id, user }, process.env.JWT_SECRET, { expiresIn: "1d" });
+// const createToken = (id, user) => {
+//     return jwt.sign({ id, user }, process.env.JWT_SECRET, { expiresIn: "1d" });
 
-}
-const verifyToken = (token) => {
-    return  jwt.verify(token, process.env.JWT_SECRET);
-}
+// }
+// const verifyToken = (token) => {
+//     return  jwt.verify(token, process.env.JWT_SECRET);
+// }
 
 
 const setError = (code, message) => {
     const error = new Error();
     error.code = error;
-    error.nessage = message;
+    error.message = message;
     return error;
 
 }
 module.exports = {
     validationEmail,
     validationPassword,
-    createToken,
-    verifyToken,
+    // createToken,
+    // verifyToken,
     setError
 }
