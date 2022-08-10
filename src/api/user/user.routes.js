@@ -18,9 +18,6 @@ const userCreateRateLimit = rateLimit({
     legacyHeaders: false,
 });
 
-
-
-
 UserRoutes.post('/register', [userCreateRateLimit], register);
 UserRoutes.post('/login', login);
 UserRoutes.get('/:id', [authorize], userById);

@@ -11,6 +11,7 @@ const schema = new Schema({
     username: { type: String, required: true, unique: true },
     password:  {type: String, required: true },
     friend: [{ type: Schema.Types.ObjectId, ref: "user" }],
+
     preference: [{ type: Schema.Types.ObjectId, ref: "artist" }],
     nextConcert: [{ type: Schema.Types.ObjectId, ref: "concert" }],
     comment: [{ type: Schema.Types.ObjectId, ref: "concert" }],

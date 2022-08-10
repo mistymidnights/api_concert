@@ -2,6 +2,7 @@ const User = require("../api/user/user.model");
 const { verifyToken } = require("../helpers/token-action");
 const { setError } = require("../helpers/utils");
 
+
 const authorize = async (req, _res, next) => {
   try {
     const token = req.headers.authorization;

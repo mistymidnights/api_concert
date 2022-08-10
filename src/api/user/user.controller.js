@@ -3,6 +3,7 @@ const bcrypt = require ('bcrypt')
 const { setError } = require('../../helpers/utils');
 const { createToken } = require('../../helpers/token-action');
 
+
 const userById = async (req, res, next) => {
     try {
       const { id } = req.params;
@@ -53,6 +54,7 @@ const login = async (req, res, next )=> {
 }
 
 
+
 const update = async (req, res, next) => {
     try {
       const { id } = req.params;
@@ -91,5 +93,10 @@ module.exports ={
     userById,
     update,
     remove
+};
+
+module.exports ={
+    register, 
+    login
 };
 
