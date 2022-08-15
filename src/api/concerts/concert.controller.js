@@ -64,24 +64,23 @@ const create = async (req, res, next) => {
 const update = async (req, res, next) => {
     try {
       const { id } = req.params;
+      const concertDB = await Concert.findById(id);
+      if (!concertDB) {
+        return next("Concert no encontrado");
+      }
+  
+      if (concertDB && req.file) {
+        deleteFile(concertDB.ticket);
+      }
   
       const patchConcertDB = new Concert(req.body);
   
       patchConcertDB._id = id;
-  
-      const ConcertDB = await Concert.findByIdAndUpdate(id, patchConcertDB);
-  
-      if (req.file) {
-        deleteFile(ConcertDB.ticket);
-      }
-  
+
       if (req.file) {
         patchConcertDB.ticket = req.file.path;
       }
-  
-      if (!ConcertDB) {
-        return next("Concert no encontrado");
-      }
+      const ConcertDB = await Concert.findByIdAndUpdate(id, patchConcertDB);
       return res.status(200).json({ new: patchConcertDB, old: ConcertDB });
     } catch (error) {
       return next("Error al modificar un concert", error);
